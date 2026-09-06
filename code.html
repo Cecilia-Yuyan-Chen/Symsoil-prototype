@@ -1,0 +1,1475 @@
+<!DOCTYPE html><html class="h-full" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>共壤 OS - 乡村振兴数字共创平台 V18</title>
+<style>
+  @layer base {
+    html, body { margin: 0; padding: 0; height: 100%; }
+    body { overscroll-behavior: none; }
+    main > :first-child { margin-top: 0 !important; }
+    main > :last-child { margin-bottom: 0 !important; }
+  }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(130, 116, 112, 0.2); border-radius: 9999px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(130, 116, 112, 0.4); }
+</style>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-secondary": "#ffffff",
+          "on-tertiary": "#ffffff",
+          "error-container": "#ffdad6",
+          "surface-container": "#f1ede8",
+          "inverse-primary": "#e7bdb1",
+          "on-surface-variant": "#504441",
+          "on-error-container": "#93000a",
+          "outline-variant": "#d4c3be",
+          "inverse-surface": "#31302d",
+          "primary": "#442a22",
+          "on-primary-fixed-variant": "#5d4037",
+          "tertiary-container": "#723600",
+          "inverse-on-surface": "#f4f0eb",
+          "secondary-fixed": "#b8f47a",
+          "background": "#fdf9f4",
+          "secondary-fixed-dim": "#9dd761",
+          "secondary": "#3c6a00",
+          "surface": "#fdf9f4",
+          "surface-dim": "#ddd9d5",
+          "on-tertiary-fixed-variant": "#723600",
+          "surface-variant": "#e6e2dd",
+          "surface-tint": "#77574d",
+          "tertiary": "#502400",
+          "error": "#ba1a1a",
+          "primary-container": "#5d4037",
+          "on-primary-fixed": "#2c160e",
+          "primary-fixed-dim": "#e7bdb1",
+          "on-secondary-fixed-variant": "#2c5000",
+          "on-primary": "#ffffff",
+          "on-tertiary-fixed": "#311300",
+          "on-primary-container": "#d4ada1",
+          "tertiary-fixed": "#ffdcc6",
+          "surface-container-low": "#f7f3ee",
+          "on-tertiary-container": "#ff9d56",
+          "primary-fixed": "#ffdbd0",
+          "surface-container-lowest": "#ffffff",
+          "tertiary-fixed-dim": "#ffb786",
+          "surface-container-high": "#ebe8e3",
+          "secondary-container": "#b8f47a",
+          "on-surface": "#1c1c19",
+          "on-secondary-fixed": "#0e2000",
+          "outline": "#827470",
+          "on-secondary-container": "#407100",
+          "on-background": "#1c1c19",
+          "on-error": "#ffffff",
+          "surface-bright": "#fdf9f4",
+          "surface-container-highest": "#e6e2dd"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "margin-screen": "20px",
+          "radius-card": "16px",
+          "gutter-sm": "12px",
+          "gutter-lg": "24px",
+          "gutter-md": "16px"
+        },
+        "fontFamily": {
+          "headline-lg": ["Plus Jakarta Sans"],
+          "body-md": ["Nunito Sans"],
+          "label-md": ["Nunito Sans"],
+          "headline-md": ["Plus Jakarta Sans"],
+          "headline-sm": ["Plus Jakarta Sans"],
+          "body-sm": ["Nunito Sans"],
+          "body-lg": ["Nunito Sans"],
+          "label-lg": ["Nunito Sans"]
+        },
+        "fontSize": {
+          "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+          "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+          "label-md": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+          "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+          "headline-sm": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+          "body-sm": ["12px", {"lineHeight": "16px", "fontWeight": "400"}],
+          "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+          "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "600"}]
+        }
+      }
+    }
+  }
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@100..900&amp;family=Plus+Jakarta+Sans:wght@100..900&amp;display=swap" rel="stylesheet">
+</head>
+<body class="bg-surface font-body text-on-surface min-h-full flex flex-col selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- Header -->
+<header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-b border-outline-variant/30">
+<div class="h-16 w-full px-margin-screen flex items-center justify-between max-w-7xl mx-auto">
+<div class="flex items-center gap-gutter-sm cursor-pointer" id="header-logo-btn">
+<span class="font-headline-sm text-primary flex items-center gap-1.5">
+<span class="w-8 h-8 rounded-lg bg-primary text-on-primary flex items-center justify-center text-sm font-bold shadow-sm">共</span>
+        共壤 Symsoil </span>
+<span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-md" id="header-role-badge">请选择身份</span>
+</div>
+<div class="flex items-center gap-gutter-sm">
+<button class="p-2 rounded-full hover:bg-surface-container-high transition-colors relative" title="通知">
+<span class="material-symbols-outlined text-on-surface">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container hover:bg-surface-container-high transition-colors text-primary text-body-sm font-bold shadow-sm" id="header-ccti-btn" title="个人中心与CCTI">
+<div class="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[14px]">person</span>
+</div>
+<span class="" id="header-username">个人中心</span>
+</button>
+<button class="px-3 py-1.5 rounded-full bg-error-container text-on-error-container font-label-md hover:opacity-80 transition-opacity flex items-center gap-1 shadow-sm" id="header-reset-btn" title="返回首页与重置状态">
+<span class="material-symbols-outlined text-[16px]">logout</span>
+<span class="hidden md:inline"><br></span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Container with Scrolling Support -->
+<main class="w-full pt-20 pb-32 bg-surface flex-grow overflow-y-auto">
+<!-- CCTI Modal -->
+<div class="fixed inset-0 z-50 bg-primary/40 backdrop-blur-md items-center justify-center p-4 hidden" id="ccti-modal">
+<div class="bg-surface rounded-xl p-6 max-w-md w-full shadow-xl relative animate-fade-in border border-outline-variant">
+<button class="absolute top-4 right-4 text-on-surface-variant hover:text-on-surface" id="ccti-close-btn">
+<span class="material-symbols-outlined">close</span>
+</button>
+<div class="flex items-center gap-3 mb-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined text-[24px]">radar</span>
+</div>
+<div>
+<h3 class="font-headline-md text-primary">CCTI 社区共创信用指数</h3>
+<p class="text-body-sm text-on-surface-variant">当前身份: <span class="font-bold text-secondary" id="current-role-badge-text">村民老王</span></p>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl mb-4 border border-outline-variant/50">
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-lg text-primary">综合信用分</span>
+<span class="font-headline-md text-secondary" id="ccti-score-val">88.5 / 100</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full transition-all duration-500" id="ccti-bar" style="width: 92.5%"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3 mb-4">
+<div class="bg-surface-container-low p-3 rounded-lg text-center border border-outline-variant/50">
+<span class="block text-body-sm text-on-surface-variant">土地/空间资产贡献</span>
+<span class="font-headline-sm text-primary" id="ccti-asset-count">2 处</span>
+</div>
+<div class="bg-surface-container-low p-3 rounded-lg text-center border border-outline-variant/50">
+<span class="block text-body-sm text-on-surface-variant">任务协作完成率</span>
+<span class="font-headline-sm text-secondary" id="ccti-rate">95%</span>
+</div>
+</div>
+<p class="text-body-sm text-on-surface-variant text-center">基于多维行为加权的社区资产区块链上链验证</p>
+</div>
+</div>
+<div class="w-full max-w-7xl mx-auto px-margin-screen">
+<!-- P0 身份选择页 -->
+<section class="view-section py-8 max-w-4xl mx-auto" id="view-p0">
+<div class="text-center mb-10">
+<span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-md inline-block mb-3">乡村振兴 OS v18</span>
+<h1 class="font-headline-lg text-primary mb-3">欢迎来到 共壤 OS</h1>
+<p class="text-body-lg text-on-surface-variant max-w-lg mx-auto">连接土地、青年与乡村未来的共创网络。请选择您的身份开启体验：</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<div class="cursor-pointer bg-surface-container-lowest hover:bg-surface-container-low p-6 rounded-xl shadow-md transition-all border-2 border-transparent hover:border-secondary flex flex-col items-center text-center group relative overflow-hidden role-card" data-role="wang">
+<div class="absolute top-2 right-2 animate-bounce bg-secondary text-on-secondary text-[10px] px-2 py-0.5 rounded-full font-bold">推荐村民入口</div>
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-primary mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[32px]">agriculture</span>
+</div>
+<h3 class="font-headline-sm text-primary mb-1">村民老王</h3>
+<p class="text-body-md text-on-surface-variant mb-4">拥有闲置平房与土地资源，希望寻找青年共创激活院落。</p>
+<span class="mt-auto px-4 py-1.5 rounded-full bg-surface-container text-primary font-label-lg group-hover:bg-secondary group-hover:text-on-secondary transition-colors">以老王身份进入</span>
+</div>
+<div class="cursor-pointer bg-surface-container-lowest hover:bg-surface-container-low p-6 rounded-xl shadow-md transition-all border-2 border-transparent hover:border-secondary flex flex-col items-center text-center group role-card" data-role="he">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-primary mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[32px]">psychology</span>
+</div>
+<h3 class="font-headline-sm text-primary mb-1">青年小禾</h3>
+<p class="text-body-md text-on-surface-variant mb-4">数字游民与创业青年，寻找乡村空间开展在地文创与轻农业。</p>
+<span class="mt-auto px-4 py-1.5 rounded-full bg-surface-container text-primary font-label-lg group-hover:bg-secondary group-hover:text-on-secondary transition-colors">以小禾身份进入</span>
+</div>
+<div class="cursor-pointer bg-surface-container-lowest hover:bg-surface-container-low p-6 rounded-xl shadow-md transition-all border-2 border-transparent hover:border-secondary flex flex-col items-center text-center group role-card" data-role="li">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-primary mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[32px]">admin_panel_settings</span>
+</div>
+<h3 class="font-headline-sm text-primary mb-1">运营者小李</h3>
+<p class="text-body-md text-on-surface-variant mb-4">社区在地运营与撮合者，统筹全局资源配置、数据看板与议事。</p>
+<span class="mt-auto px-4 py-1.5 rounded-full bg-surface-container text-primary font-label-lg group-hover:bg-secondary group-hover:text-on-secondary transition-colors">以小李身份进入</span>
+</div>
+</div>
+<div class="text-center">
+<button class="px-8 py-3 rounded-xl bg-primary text-on-primary font-label-lg shadow-md hover:opacity-90 transition-opacity" id="quick-start-btn">快速体验青年/村民模式</button>
+</div>
+</section>
+<!-- Map View -->
+<section class="view-section py-4 max-w-5xl mx-auto hidden" id="view-map">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-4">
+<div>
+<h2 class="font-headline-md text-primary" id="map-view-title">全国乡村共创网络数字孪生视图</h2>
+<p class="text-body-md text-on-surface-variant" id="map-view-desc">点击各村庄分站可查看其资产与活跃度，并支持一键切换当前村庄</p>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-low p-1 rounded-xl border border-outline-variant/40">
+<button class="px-4 py-1.5 rounded-lg text-on-surface-variant font-label-md hover:text-primary transition-all" id="btn-scope-local">九华村大局</button>
+<button class="px-4 py-1.5 rounded-lg bg-surface text-primary font-label-md shadow-sm transition-all" id="btn-scope-national">全国共创网络</button>
+</div>
+</div>
+<!-- Story Tour Tip & Floating Guide -->
+<div class="mb-4 bg-secondary-container/60 border border-secondary p-3 rounded-xl flex items-center justify-between text-on-secondary-container shadow-sm relative">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined animate-bounce text-secondary">tips_and_updates</span>
+<span class="text-body-sm font-bold" id="map-guide-text">👉 提示：当前展示全国地形共创网络，支持缩放与拖拽，点击任意节点即可切换主站！</span>
+</div>
+<button class="px-3 py-1 rounded bg-secondary text-on-secondary text-xs font-bold hover:opacity-90 transition-opacity" id="guide-goto-create-btn">去发布空间</button>
+</div>
+<!-- Map Container Wrapper -->
+<div class="relative w-full h-[520px] rounded-xl overflow-hidden shadow-md bg-surface-container-high border border-outline-variant">
+<!-- Map Layer: Local View (Using user-provided hand-drawn map image) -->
+<div class="absolute inset-0 transition-opacity duration-300 hidden" id="map-layer-local">
+<img alt="九华村手绘航拍地图" class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDEoc2m6RiXRLeqAnIa9ZON6nFOZ4BLQLQ1PqQE6T8EX6dWNiOLviyS4s0_FCCA1PqeA0sBnq201PUHUBUq8LBaMCzPaImvnjbGk1RUGv9ApcqTS7YwBHVIaREuUaEgP5FVHk6uI-mc_9WbrhObpyyqQ16zkopYP0cknFOG6aVrz10tGFXeGjxpF7mTl101RSaM3ipB893cpmQiXOWwh1OpKJo90fu6WsHK-Epfpsw1x8zhg3jrDXkouMJB6lWzyNs">
+<div class="absolute inset-0 bg-black/10 pointer-events-none"></div>
+<!-- Top-Left Location Coordinate Float Window -->
+<div class="absolute top-4 left-4 bg-surface/90 backdrop-blur-md px-3.5 py-2 rounded-xl shadow-md border border-outline-variant/50 z-20 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">location_on</span>
+<div>
+<div class="text-[11px] text-on-surface-variant font-medium">GPS 实时定位</div>
+<div class="text-xs font-bold text-primary" id="map-location-label">当前位置：九华村核心枢纽（北纬30.5° 东经120.5°）</div>
+</div>
+</div>
+<!-- AI Floating Bubble Prompt -->
+<div class="absolute top-20 left-4 bg-surface/95 backdrop-blur-md p-3.5 rounded-xl shadow-lg max-w-xs border-l-4 border-secondary z-20">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-secondary text-[18px]">smart_toy</span>
+<span class="font-label-md text-primary">小壤 AI 智能提示</span>
+</div>
+<p class="text-body-sm text-on-surface" id="map-ai-tip">“北山坡地闲置平房刚完成 AI 匹配，建议改造为青年陶艺工坊！”</p>
+</div>
+<div class="absolute top-[35%] left-[28%] cursor-pointer group flex flex-col items-center z-10 map-pin" data-pin="pin1">
+<div class="w-10 h-10 rounded-full bg-secondary text-on-secondary flex items-center justify-center shadow-lg animate-bounce">
+<span class="material-symbols-outlined text-[20px]">home</span>
+</div>
+<span class="bg-surface/95 px-2.5 py-1 rounded-full text-body-sm text-primary font-bold shadow mt-1 border border-secondary">🏠 老王闲置平房 (点击查看)</span>
+</div>
+<div class="absolute top-[50%] left-[62%] cursor-pointer group flex flex-col items-center z-10 map-pin" data-pin="pin2">
+<div class="w-10 h-10 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center shadow-lg animate-pulse">
+<span class="material-symbols-outlined text-[20px]">bolt</span>
+</div>
+<span class="bg-surface/95 px-2 py-0.5 rounded text-body-sm text-primary font-bold shadow mt-1 border border-outline-variant">古法榨油坊改造 (需求)</span>
+</div>
+<div class="absolute bottom-[25%] left-[45%] cursor-pointer group flex flex-col items-center z-10 map-pin" data-pin="pin3">
+<div class="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg animate-pulse">
+<span class="material-symbols-outlined text-[20px]">explore</span>
+</div>
+<span class="bg-surface/95 px-2 py-0.5 rounded text-body-sm text-primary font-bold shadow mt-1 border border-outline-variant">周末稻田市集 (机会)</span>
+</div>
+</div>
+<!-- Map Layer: Interactive Zoomable National Network View -->
+<div class="absolute inset-0 transition-opacity duration-300 bg-[#fbf9f4] overflow-hidden" id="map-layer-national">
+<!-- Zoom Controls UI -->
+<!-- Zoomable & Pannable Viewport Wrapper -->
+<div class="w-full h-full relative cursor-grab active:cursor-grabbing select-none" id="national-map-viewport" style="cursor: grab;"><div class="absolute inset-0 w-full h-full overflow-hidden"><img alt="中国地形图" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeleTmbdXuRzESsYAX-no0R7LEmNvpKoq7IxjUHpMBpWbYnXjqaUKBIf9uDFneiokoU50Xif4ALSQZrPlRlrNyERTtXlaNykH3D1BKvJx_3XnLwB10qRRqRoYeZkumj0YSrrNN0T3A6X4IuJqiNjdSBXMEw_niWwBgaSWN4RsfFfz-vhjB2xODpzmEQcXImjDuQewOlwYLoJoSW33yN1wXTpDXreRUHALZZ7UmRr1SoQuBx1cDWlBTAGUWtCAxZqOh"><div class="absolute inset-0 bg-black/5 pointer-events-none"></div><svg class="absolute inset-0 w-full h-full pointer-events-none stroke-[#442a22]/70" stroke-dasharray="4"><line stroke-width="2" x1="530" x2="520" y1="360" y2="330"></line><line stroke-width="2" x1="530" x2="480" y1="360" y2="280"></line><line stroke-width="2" x1="530" x2="230" y1="360" y2="80"></line><line stroke-width="2" x1="530" x2="400" y1="360" y2="400"></line></svg><div class="absolute top-[360px] left-[530px] -translate-x-1/2 -translate-y-1/2 cursor-pointer group flex flex-col items-center z-20 village-node" data-coords="北纬30.5° 东经120.5°" data-stats="活跃度 94.2% · 资产 38处" data-village="九华村核心枢纽"><div class="w-10 h-10 rounded-full bg-secondary text-on-secondary flex items-center justify-center shadow-xl ring-4 ring-secondary/50 group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[18px]">hub</span></div><span class="bg-surface/95 px-2 py-0.5 rounded-full text-[10px] text-primary font-bold shadow-lg mt-0.5 border-2 border-secondary whitespace-nowrap">九华村核心枢纽</span></div><div class="absolute top-[330px] left-[520px] -translate-x-1/2 -translate-y-1/2 cursor-pointer group flex flex-col items-center z-20 village-node" data-coords="北纬34.3° 东经108.9°" data-stats="活跃度 96.5% · 资产 24处" data-village="关中平原协作点"><div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[14px]">landscape</span></div><span class="bg-surface/95 px-1.5 py-0.5 rounded text-[10px] text-primary font-bold shadow-lg mt-0.5 border border-outline-variant whitespace-nowrap">关中平原协作点</span></div><div class="absolute top-[280px] left-[480px] -translate-x-1/2 -translate-y-1/2 cursor-pointer group flex flex-col items-center z-20 village-node" data-coords="北纬33.8° 东经107.8°" data-stats="活跃度 98.0% · 资产 45处" data-village="秦岭生态点"><div class="w-8 h-8 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[14px]">forest</span></div><span class="bg-surface/95 px-1.5 py-0.5 rounded text-[10px] text-primary font-bold shadow-lg mt-0.5 border border-outline-variant whitespace-nowrap">秦岭生态点</span></div><div class="absolute top-[400px] left-[400px] -translate-x-1/2 -translate-y-1/2 cursor-pointer group flex flex-col items-center z-20 village-node" data-coords="北纬33.1° 东经107.0°" data-stats="活跃度 91.0% · 资产 19处" data-village="汉中盆地文创社"><div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[14px]">palette</span></div><span class="bg-surface/95 px-1.5 py-0.5 rounded text-[10px] text-primary font-bold shadow-lg mt-0.5 border border-outline-variant whitespace-nowrap">汉中盆地文创社</span></div><div class="absolute top-[80px] left-[230px] -translate-x-1/2 -translate-y-1/2 cursor-pointer group flex flex-col items-center z-20 village-node" data-coords="北纬36.0° 东经103.8°" data-stats="活跃度 93.5% · 资产 28处" data-village="蜀水生态协作社"><div class="w-8 h-8 rounded-full bg-error text-on-error flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform"><span class="material-symbols-outlined text-[14px]">water_drop</span></div><span class="bg-surface/95 px-1.5 py-0.5 rounded text-[10px] text-primary font-bold shadow-lg mt-0.5 border border-outline-variant whitespace-nowrap">蜀水生态协作社</span></div></div></div>
+</div>
+</div>
+<div class="mt-4 bg-surface rounded-xl p-6 w-full shadow-md border border-outline-variant hidden" id="map-pin-detail"><div class="flex items-center justify-between mb-4"><div class="flex items-center gap-3"><div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container"><span class="material-symbols-outlined text-[24px]">home</span></div><div><h3 class="font-headline-md text-primary" id="pin-title">老王闲置平房</h3><p class="text-body-sm text-on-surface-variant">资产编号: <span class="font-bold text-secondary">#ASSET-01</span></p></div></div><button class="text-on-surface-variant hover:text-on-surface" id="pin-close-btn"><span class="material-symbols-outlined">close</span></button></div><div class="bg-surface-container-low p-4 rounded-xl mb-4 border border-outline-variant/50"><p class="text-body-md text-on-surface mb-2 font-bold" id="pin-desc">位于九华村三组，面积120平米带有独立院落，适合作为茶室或手作工作室。</p><p class="text-body-sm text-on-surface-variant">建筑面积约 110㎡，水电路齐全，拥有独立院落。</p></div><div class="flex gap-3"><button class="flex-1 py-2.5 rounded-xl bg-secondary text-on-secondary font-label-md shadow hover:opacity-90 transition-opacity" id="pin-goto-create-btn">发起议事讨论生成任务</button><button class="px-4 py-2.5 rounded-xl bg-surface-container text-primary font-label-md hover:bg-surface-container-high transition-colors" id="pin-goto-forum-btn">前往议事厅</button></div></div></section></div>
+<!-- Pin Detail Drawer -->
+<!-- Tasks / Villager Publish Flow View (SPA Automated Flow) -->
+<section class="view-section py-4 max-w-3xl mx-auto hidden" id="view-tasks">
+<div class="max-w-4xl mx-auto">
+<!-- Task Sub View 1: Create / Publish Asset (Step 1) -->
+<div class="task-sub-view hidden" id="task-sub-create">
+<div class="mb-6 flex items-center justify-between">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container text-primary font-label-md hover:bg-surface-container-high transition-colors flex items-center gap-1 shadow-sm task-back-hall-btn">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span> 返回任务大厅
+      </button>
+<span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-md">步骤 1：村民发布资产与空间</span>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-md mb-6 border border-outline-variant">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-headline-sm text-primary">发布闲置资产与空间 / 任务创建</h3>
+</div>
+<div class="space-y-4">
+<div>
+<label class="block font-label-lg text-primary mb-1">资产描述（输入文字触发AI补全）</label>
+<textarea class="w-full bg-surface-container-low p-3 rounded-xl border border-outline-variant/50 focus:ring-2 focus:ring-secondary text-body-md" id="asset-input" placeholder="村东头老院子，三间平房带个小院，想租给年轻人搞点文创。" rows="3">村东头老院子，三间平房带个小院，想租给年轻人搞点文创。</textarea>
+</div>
+<div class="text-right">
+<button class="px-4 py-2 rounded-xl bg-primary text-on-primary font-label-md shadow hover:opacity-90 transition-opacity inline-flex items-center gap-1.5" id="ai-generate-btn">
+<span class="material-symbols-outlined text-[16px]">auto_awesome</span> ✨ 点击一键生成AI结构化补全
+          </button>
+</div>
+<!-- Loading indicator (hidden by default) -->
+<div class="p-6 text-center bg-surface-container-low rounded-xl border border-outline-variant/50 hidden" id="ai-loading-box">
+<span class="material-symbols-outlined animate-spin text-[32px] text-secondary mb-2">progress_activity</span>
+<p class="text-body-sm font-bold text-primary">小壤 AI 正在深度结构化分析与匹配闲置资产...</p>
+</div>
+<!-- AI result box (hidden by default initially) -->
+<div class="bg-surface-container-low p-4 rounded-xl border-l-4 border-secondary animate-fade-in border border-outline-variant/55 hidden" id="ai-complete-box">
+<div class="flex items-center gap-2 mb-2 text-secondary font-label-md">
+<span class="material-symbols-outlined text-[18px]">auto_awesome</span>
+<span class="">小壤 AI 自动结构化补全</span>
+</div>
+<p class="text-body-sm text-on-surface mb-3">已自动生成：【空间类型】村民自建院落 【建筑面积】110㎡ 【适合业态】咖啡轻食/数字游民工位 【预估收益】约 3000积分/月</p>
+<div class="bg-secondary-container/50 p-4 rounded-xl border border-secondary text-on-secondary-container mb-3">
+<p class="text-body-sm font-bold mb-1">💚 空间资产已成功流转至议事厅！</p>
+<p class="text-body-sm">系统已根据资产信息自动生成共创提案 #04《关于村东头闲置院落活化为青年文创茶室的议事》</p>
+</div>
+<button class="px-4 py-2.5 rounded-xl bg-secondary text-on-secondary font-label-md shadow hover:opacity-90 transition-opacity" id="ai-goto-forum-btn">前往议事厅查看提案与投票结果</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Task Sub View 2: Hall (Step 3) -->
+<div class="task-sub-view" id="task-sub-hall">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h2 class="font-headline-md text-primary">共创任务大厅</h2>
+<p class="text-body-md text-on-surface-variant">发现并认领最适合您的乡村振兴共创任务</p>
+</div>
+<button class="px-4 py-2 rounded-xl bg-primary text-on-primary font-label-lg shadow hover:opacity-90 transition-opacity flex items-center gap-1.5" id="goto-create-task-btn">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>发布任务/资产
+      </button>
+</div>
+<!-- Step 3 Floating Guide Banner -->
+<div class="mb-6 bg-secondary-container border-2 border-secondary p-4 rounded-xl flex items-center justify-between text-on-secondary-container shadow-md animate-pulse">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[24px]">tips_and_updates</span>
+<span class="text-body-md font-bold">💡 提案已落地为真实任务，青年小何可点击卡片进入详情并接取协作！</span>
+</div>
+<button class="px-3 py-1.5 rounded-lg bg-secondary text-on-secondary text-xs font-bold hover:opacity-90 transition-opacity goto-detail-btn">去接任务</button>
+</div>
+<h3 class="font-headline-sm text-primary mb-4">真实任务池</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+<div class="bg-surface-container-lowest p-5 rounded-xl shadow-md border-2 border-secondary flex flex-col justify-between cursor-pointer hover:shadow-lg transition-all goto-detail-btn">
+<div>
+<div class="flex justify-between items-start mb-2">
+<span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-md">空间活化·新落地</span>
+<span class="text-body-sm text-secondary font-bold">奖励 +1,250 积分</span>
+</div>
+<h4 class="font-headline-sm text-primary mb-2">村东头老院子青年文创茶室改造</h4>
+<p class="text-body-sm text-on-surface-variant mb-4">协助村民老王对东头平房进行轻量化原木风软装布置与吧台搭建。</p>
+</div>
+<div class="flex justify-between items-center mt-auto">
+<span class="text-body-sm text-secondary font-bold">议事已通过 · 随时可接取</span>
+<span class="text-secondary font-bold text-body-sm">立即查看 &gt;</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-xl shadow-md border border-outline-variant flex flex-col justify-between cursor-pointer hover:border-secondary transition-colors goto-detail-btn">
+<div>
+<div class="flex justify-between items-start mb-2">
+<span class="px-2.5 py-0.5 rounded-full bg-surface-container text-primary font-label-md">数字农业</span>
+<span class="text-body-sm text-primary font-bold">奖励 +200 积分</span>
+</div>
+<h4 class="font-headline-sm text-primary mb-2">九华村有机稻田认养与直播</h4>
+<p class="text-body-sm text-on-surface-variant mb-4">使用手机协助村民记录稻田生长周期并完成一场抖音助农直播。</p>
+</div>
+<div class="flex justify-between items-center mt-auto">
+<span class="text-body-sm text-on-surface-variant">已有 1 人报名协作</span>
+<span class="text-secondary font-bold text-body-sm">立即查看 &gt;</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Task Sub View 3: Detail & Execution (Step 4) -->
+<div class="task-sub-view hidden" id="task-sub-detail">
+<div class="mb-6 flex items-center justify-between">
+<button class="px-3 py-1.5 rounded-lg bg-surface-container text-primary font-label-md hover:bg-surface-container-high transition-colors flex items-center gap-1 shadow-sm task-back-hall-btn">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span> ← 返回任务大厅
+      </button>
+<span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-md">步骤 4：任务详情与执行成果提交</span>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-md mb-6 border border-secondary">
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="px-2.5 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-md mb-2 inline-block">空间活化任务</span>
+<h3 class="font-headline-md text-primary">村东头老院子青年文创茶室改造</h3>
+</div>
+</div>
+<p class="text-body-md text-on-surface-variant mb-4">任务详情描述：协助村民老王对东头平房进行轻量化原木风软装布置与吧台搭建,赋能在地青年文创社群。</p>
+<div class="flex gap-4 mb-6 text-body-sm text-on-surface-variant flex-wrap bg-surface-container-low p-3 rounded-xl border border-outline-variant/40">
+<span class="">📍 地点：九华村三组老王平房</span>
+<span class="">⏱ 周期：3天</span>
+<span class="">💰 奖励：+1,250 积分</span>
+<span class="">👥 已报名：青年小禾等2人</span>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl shadow-sm mb-6 border border-outline-variant/50">
+<h4 class="font-headline-sm text-primary mb-3">任务执行与成果提交</h4>
+<p class="text-body-md text-on-surface-variant mb-4">请上传改造后的现场照片凭证，提交后将自动触发积分发放与上链验证。</p>
+<div class="border-2 border-dashed border-outline-variant rounded-xl p-8 text-center mb-4 cursor-pointer hover:border-secondary bg-surface transition-colors" id="upload-proof-box">
+<span class="material-symbols-outlined text-[48px] text-on-surface-variant mb-2">add_a_photo</span>
+<p class="text-body-md text-primary font-bold" id="upload-proof-text">点击上传现场照片凭证 (支持多图)</p>
+</div>
+<!-- 必须明确包含 id="submit-proof-btn" 的提交按钮 -->
+<button class="w-full py-3 rounded-xl bg-secondary text-on-secondary font-label-lg text-center block shadow hover:opacity-90 transition-opacity cursor-pointer mb-4" id="submit-proof-btn">👉 提交成果并申请积分发放</button>
+<!-- Slide-down Success Card inside Task Detail -->
+<div class="bg-secondary-container border border-secondary p-4 rounded-xl text-on-secondary-container animate-fade-in hidden" id="task-success-card">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary text-[24px]">verified</span>
+<div class="flex-grow">
+<h5 class="font-headline-sm mb-1">🎉 共创积分发放成功！</h5>
+<p class="text-body-sm mb-3">+1,250 积分已存入您的账户，感谢您对社区的贡献！</p>
+<button class="px-4 py-2 rounded-xl bg-secondary text-on-secondary font-label-md shadow hover:opacity-90 transition-opacity cursor-pointer mx-auto block" id="goto-shop-from-success-btn">👉 前往兑换站兑换乡村好物</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Parliament / Forum View -->
+<section class="view-section py-4 max-w-5xl mx-auto hidden" id="view-forum">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h2 class="font-headline-md text-primary">共壤社区议事大厅 &amp; 论坛 (V18)</h2>
+<p class="text-body-md text-on-surface-variant">上下双区民主协商：实时表决、多状态提案与社区共创热议</p>
+</div>
+<button class="px-4 py-2 rounded-xl bg-primary text-on-primary font-label-lg shadow hover:opacity-90 transition-opacity flex items-center gap-1.5" id="new-proposal-btn">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>发布新提案
+</button>
+</div>
+<!-- Upper Area: Real-time Voting Card (Proposal #04) -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-md border-2 border-secondary relative mb-8" id="proposal-card-dynamic">
+<div class="flex justify-between items-center mb-2">
+<span class="px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-md font-bold" id="prop-4-status">📊 表决中 (当前支持率 42%)</span>
+<span class="text-xs text-on-surface-variant">来自村民老王空间资产流转</span>
+</div>
+<h4 class="font-headline-md text-primary mb-2">关于村东头闲置院落活化为青年文创咖啡美陈茶室的议事</h4>
+<p class="text-body-md text-on-surface-variant mb-4">将老王三间平房改造成数字游民咖啡茶室与轻食空间，赋能乡村文旅，带动在地村民共同收益。</p>
+<div class="bg-surface-container-low p-4 rounded-xl mb-4 border border-outline-variant/50">
+<div class="flex justify-between items-center mb-1 text-body-sm">
+<span class="text-on-surface-variant">当前赞成率 (达 50% 即自动转化为共创任务)</span>
+<span class="font-bold text-secondary text-base" id="prop-4-rate">42% (21票)</span>
+</div>
+<div class="w-full bg-surface-container-highest h-3 rounded-full overflow-hidden mb-3 relative">
+<div class="absolute top-0 bottom-0 left-[50%] w-0.5 bg-error z-10" title="50%通过线"></div>
+<div class="bg-secondary h-full rounded-full transition-all duration-300" id="prop-4-bar" style="width: 42%;"></div>
+</div>
+<div class="flex gap-3 flex-wrap">
+<button class="px-6 py-2.5 rounded-xl bg-secondary text-on-secondary font-label-lg hover:opacity-90 transition-opacity shadow-sm flex items-center gap-1.5" id="prop-4-btn">投赞成票 (+6%)</button>
+<button class="px-4 py-2.5 rounded-xl bg-surface-container text-primary font-label-lg hover:bg-surface-container-high transition-colors" id="prop-whitepaper-btn">查阅议事白皮书</button>
+</div>
+</div>
+<div class="bg-secondary-container/50 p-4 rounded-xl border border-secondary text-on-secondary-container hidden" id="prop-success-tip">
+<p class="text-body-md font-bold mb-1">🎉 提案已成功转化为共创任务！</p>
+<p class="text-body-sm mb-3">支持率已达 68%, 议事顺利通过。任务卡片已自动生成，请点击下方按钮前往任务详情页查看或直接接取！</p>
+<button class="px-4 py-2 rounded-xl bg-secondary text-on-secondary font-label-md shadow hover:opacity-90 transition-opacity" id="prop-goto-task-detail-btn">👉 点击前往任务详情页</button>
+</div>
+</div>
+<!-- Middle Area: Grid of Multi-Status Proposal Cards -->
+<h3 class="font-headline-sm text-primary mb-4">社区议事提案矩阵 (多状态网格)</h3>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border border-outline-variant flex flex-col justify-between hover:border-secondary transition-colors">
+<div>
+<div class="flex justify-between items-center mb-2">
+<span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container text-[11px] font-bold">已通过</span>
+<span class="text-[10px] text-on-surface-variant">#03 数字农业</span>
+</div>
+<h4 class="font-headline-sm text-primary text-sm mb-1 line-clamp-1">九华村有机稻田认养</h4>
+<p class="text-body-sm text-on-surface-variant text-xs mb-3 line-clamp-2">数字化手段帮助村民建立有机稻田认养基地，打通线上直销链路。</p>
+</div>
+<div class="pt-2 border-t border-outline-variant/30 flex gap-2">
+<button class="flex-1 py-1 rounded bg-secondary text-on-secondary text-xs font-bold hover:opacity-90 transition-opacity text-center matrix-goto-task">去接任务</button>
+<button class="flex-1 py-1 rounded bg-surface-container text-primary text-xs font-semibold hover:bg-surface-container-high transition-colors text-center matrix-detail-1">详情</button>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border border-outline-variant flex flex-col justify-between hover:border-secondary transition-colors">
+<div>
+<div class="flex justify-between items-center mb-2">
+<span class="px-2 py-0.5 rounded bg-secondary-container text-on-secondary-container text-[11px] font-bold">已通过</span>
+<span class="text-[10px] text-on-surface-variant">#05 老桥夜景</span>
+</div>
+<h4 class="font-headline-sm text-primary text-sm mb-1 line-clamp-1">古桥夜景亮化工程</h4>
+<p class="text-body-sm text-on-surface-variant text-xs mb-3 line-clamp-2">古桥节点增设太阳能氛围灯带，提升夜间乡村旅游吸引力。</p>
+</div>
+<div class="pt-2 border-t border-outline-variant/30 flex gap-2">
+<button class="flex-1 py-1 rounded bg-secondary text-on-secondary text-xs font-bold hover:opacity-90 transition-opacity text-center matrix-goto-task">去接任务</button>
+<button class="flex-1 py-1 rounded bg-surface-container text-primary text-xs font-semibold hover:bg-surface-container-high transition-colors text-center matrix-detail-2">详情</button>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border border-outline-variant flex flex-col justify-between hover:border-secondary transition-colors">
+<div>
+<div class="flex justify-between items-center mb-2">
+<span class="px-2 py-0.5 rounded bg-error-container text-on-error-container text-[11px] font-bold">未通过</span>
+<span class="text-[10px] text-on-surface-variant">#02 商业广场</span>
+</div>
+<h4 class="font-headline-sm text-primary text-sm mb-1 line-clamp-1">古树广场夜市摊位</h4>
+<p class="text-body-sm text-on-surface-variant text-xs mb-3 line-clamp-2">拟在古树广场增设夜市摊位，因村民投票反对油烟及噪音污染未达门槛。</p>
+</div>
+<div class="pt-2 border-t border-outline-variant/30 flex gap-2">
+<button class="flex-1 py-1 rounded bg-primary text-on-primary text-xs font-bold hover:opacity-90 transition-opacity text-center matrix-restart">重新发起</button>
+<button class="flex-1 py-1 rounded bg-surface-container text-primary text-xs font-semibold hover:bg-surface-container-high transition-colors text-center matrix-detail-3">详情</button>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-sm border border-outline-variant flex flex-col justify-between hover:border-secondary transition-colors">
+<div>
+<div class="flex justify-between items-center mb-2">
+<span class="px-2 py-0.5 rounded bg-primary-container text-on-primary-container text-[11px] font-bold">表决中</span>
+<span class="text-[10px] text-on-surface-variant">#06 亲子农场</span>
+</div>
+<h4 class="font-headline-sm text-primary text-sm mb-1 line-clamp-1">闲置荒地亲子认养园</h4>
+<p class="text-body-sm text-on-surface-variant text-xs mb-3 line-clamp-2">将村西头荒地改造成周末亲子研学农场，现正征集村民意见。</p>
+</div>
+<div class="pt-2 border-t border-outline-variant/30 flex gap-2">
+<button class="flex-1 py-1 rounded bg-secondary text-on-secondary text-xs font-bold hover:opacity-90 transition-opacity text-center matrix-vote-6">投赞成票</button>
+<button class="flex-1 py-1 rounded bg-surface-container text-primary text-xs font-semibold hover:bg-surface-container-high transition-colors text-center matrix-detail-6">详情</button>
+</div>
+</div>
+</div>
+<!-- Lower Area: Forum Community Discussion & Posting Area -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-md border border-outline-variant">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-headline-sm text-primary">社区日常交流与议题讨论区</h3>
+<button class="px-3 py-1.5 rounded-lg bg-surface-container text-primary text-xs font-bold hover:bg-surface-container-high transition-colors" id="post-forum-btn">发表讨论</button>
+</div>
+<div class="space-y-4" id="forum-posts-list">
+<div class="p-4 bg-surface-container-low rounded-xl border border-outline-variant/45">
+<div class="flex justify-between items-center mb-1">
+<span class="font-bold text-primary text-body-md flex items-center gap-1.5"><span class="w-6 h-6 rounded-full bg-secondary text-on-secondary flex items-center justify-center text-xs">王</span> 村民老王：</span>
+<span class="text-xs text-on-surface-variant">10分钟前</span>
+</div>
+<p class="text-body-sm text-on-surface mb-2">“东头平房院子已经顺利通过小壤AI补全并流转到议事厅了,欢迎年轻人来喝茶！”</p>
+<div class="flex items-center gap-4 text-xs text-on-surface-variant">
+<button class="hover:text-secondary flex items-center gap-1 forum-like-btn"><span class="material-symbols-outlined text-[14px]">thumb_up</span> 赞同 (12)</button>
+<button class="hover:text-secondary flex items-center gap-1 forum-reply-btn"><span class="material-symbols-outlined text-[14px]">chat</span> 回复</button>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low rounded-xl border border-outline-variant/45">
+<div class="flex justify-between items-center mb-1">
+<span class="font-bold text-secondary text-body-md flex items-center gap-1.5"><span class="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center text-xs">禾</span> 青年小禾：</span>
+<span class="text-xs text-on-surface-variant">25分钟前</span>
+</div>
+<p class="text-body-sm text-on-surface mb-2">“软装物料已经准备好，周末可以直接进场搭建茶室吧台，期待！”</p>
+<div class="flex items-center gap-4 text-xs text-on-surface-variant">
+<button class="hover:text-secondary flex items-center gap-1 forum-like-btn"><span class="material-symbols-outlined text-[14px]">thumb_up</span> 赞同 (24)</button>
+<button class="hover:text-secondary flex items-center gap-1 forum-reply-btn"><span class="material-symbols-outlined text-[14px]">chat</span> 回复 (3)</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Shop / Exchange Station View -->
+<section class="view-section py-4 max-w-4xl mx-auto hidden" id="view-shop">
+<div class="bg-gradient-to-r from-primary to-primary-container text-on-primary p-6 rounded-xl shadow-md mb-6 flex justify-between items-center">
+<div>
+<span class="text-body-md text-inverse-primary">我的共创积分余额</span>
+<h2 class="font-headline-lg" id="shop-user-balance">1250 积分</h2>
+</div>
+<div class="text-right">
+<span class="text-body-sm text-inverse-primary">社区公共池基金</span>
+<h3 class="font-headline-md text-secondary-fixed">8,600 积分</h3>
+</div>
+</div>
+<h3 class="font-headline-sm text-primary mb-4">乡村特色积分兑换站</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+<div class="bg-surface-container-lowest rounded-xl shadow-md overflow-hidden flex flex-col border border-outline-variant">
+<div class="h-40 bg-surface-container relative overflow-hidden">
+<img alt="九华有机大米" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCveI8-LrWAufh0C96L9dr2oJe_NxIY7TunKVIixFOaiqHmm3VviLEqy8VUDDceYWGIPgZw9vwkGQ5seuuLQArjPR_bte97oKcHoM4H4Us3LAjjJP9VFnKlXdbtBtr4H9FOamDlXcn8XO72j22BD5gAciVdKVZAuJ_r7UtaXEhkITTQy3Sy4OydmJ9_Ty7ahHZMhGUl-O_MTFODox_2T9WdhRcePEJAjk4w0fRnrrEfDTjpcAO8UlQ">
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<h4 class="font-headline-sm text-primary mb-1">九华有机杂粮 (5kg)</h4>
+<p class="text-body-sm text-on-surface-variant mb-4">村民古法种植，清香软糯。</p>
+<div class="mt-auto flex justify-between items-center">
+<span class="font-headline-sm text-secondary">300 积分</span>
+<button class="px-3 py-1.5 rounded-lg bg-primary text-on-primary font-label-md hover:opacity-90 transition-opacity exchange-btn" data-cost="300" data-name="九华有机大米 (5kg)">立即兑换</button>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl shadow-md overflow-hidden flex flex-col border border-outline-variant">
+<div class="h-40 bg-surface-container relative overflow-hidden">
+<img alt="周末民宿体验券" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAU4IW9BiQrdpBjXkrueg7zHDW4QfStu5BlNozpPkys_9M6TWPf-4d-6v2K4x2NaLLQcdlqEeop06QYi1kc8N6x995IUgE3k9SsF6nf8Q3KST7c5yk9HcNI9y-GKyEYkLaNiqVVGHZI2vcGgwNqYq3q5UxLnxtnXFqMWqh16yaaoykt7shgRcPuZYVuBsmkr_oRFhupvgAgLkZdEwwvlYPEhUOdDBoJ7NONtZb3foLiDJcml92GA5Y">
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<h4 class="font-headline-sm text-primary mb-1">周末民宿体验券</h4>
+<p class="text-body-sm text-on-surface-variant mb-4">体验老王院落改造后的一晚住宿。</p>
+<div class="mt-auto flex justify-between items-center">
+<span class="font-headline-sm text-secondary">800 积分</span>
+<button class="px-3 py-1.5 rounded-lg bg-primary text-on-primary font-label-md hover:opacity-90 transition-opacity exchange-btn" data-cost="800" data-name="周末民宿体验券">立即兑换</button>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl shadow-md overflow-hidden flex flex-col border border-outline-variant">
+<div class="h-40 bg-surface-container relative overflow-hidden">
+<img alt="在地手作陶艺杯" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHmRdOpc7x7scpcYdhAUl6Ku_WeyBbf4nkaV20Jygy7hDjlSPqrP4NxZlQ6-m0UYp2xH-JviiBlI9YfAzkW0uD_U6EfvatGmO0ElYZs_96HYZvHAE3JQzey1nEOro82pv-mreIAusk7xX36KN0EUYgPTSU_1jEg5CQCIwz7St0qe2xECkQj5fSXMJpG24XlV5LfxjqkE4avh1DJ5pIVToNyuwEPET0QHWpUfBj_tn7z-kF9vUgSto">
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<h4 class="font-headline-sm text-primary mb-1">在地手作陶艺杯</h4>
+<p class="text-body-sm text-on-surface-variant mb-4">青年与村民联手创作的手作茶具。</p>
+<div class="mt-auto flex justify-between items-center">
+<span class="font-headline-sm text-secondary">250 积分</span>
+<button class="px-3 py-1.5 rounded-lg bg-primary text-on-primary font-label-md hover:opacity-90 transition-opacity exchange-btn" data-cost="250" data-name="在地手作陶艺杯">立即兑换</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Operator Cockpit View V18 -->
+<section class="view-section py-4 max-w-5xl mx-auto hidden" id="view-cockpit">
+<div class="flex justify-between items-center mb-6">
+<div>
+<h2 class="font-headline-md text-primary">运营者驾驶舱 (Dashboard V18)</h2>
+<p class="text-body-md text-on-surface-variant">全局数据看板与动态社交网络共创图谱</p>
+</div>
+<div class="flex gap-2">
+<select class="bg-surface-container-low px-3 py-1.5 rounded-lg text-primary font-label-md border border-outline-variant/50 shadow-sm">
+<option>九华村总站</option>
+<option>青龙村分站</option>
+</select>
+</div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-md border border-outline-variant">
+<span class="text-body-sm text-on-surface-variant">社区活跃度</span>
+<h3 class="font-headline-lg text-primary">94.2%</h3>
+<span class="text-body-sm text-secondary font-bold">↑ 12% 较上月</span>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-md border border-outline-variant">
+<span class="text-body-sm text-on-surface-variant">已激活资产</span>
+<h3 class="font-headline-lg text-primary">38 处</h3>
+<span class="text-body-sm text-secondary font-bold">空间转化率 85%</span>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-md border border-outline-variant">
+<span class="text-body-sm text-on-surface-variant">CCTI 均分</span>
+<h3 class="font-headline-lg text-primary">89.4</h3>
+<span class="text-body-sm text-secondary font-bold">信用良好</span>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl shadow-md border border-outline-variant">
+<span class="text-body-sm text-on-surface-variant">公共池积分</span>
+<h3 class="font-headline-lg text-primary">24.5k</h3>
+<span class="text-body-sm text-secondary font-bold">良性循环</span>
+</div>
+</div>
+<!-- Dynamic Social Network Graph Section V18 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-md border border-outline-variant mb-6">
+<div class="flex justify-between items-center mb-4">
+<h3 class="font-headline-sm text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">hub</span>
+社区动态社交网络与共创图谱 (Social Graph)
+</h3>
+<span class="text-xs text-on-surface-variant bg-surface-container px-2.5 py-1 rounded-full">实时链上协同脉络</span>
+</div>
+<div class="relative w-full h-[360px] bg-surface-container-high rounded-xl overflow-hidden border border-outline-variant/60 flex items-center justify-center" style="background: radial-gradient(circle at center, #f4f0eb 0%, #e6e2dd 100%);">
+<div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: radial-gradient(#442a22 1.5px, transparent 1.5px); background-size: 24px 24px;"></div>
+<svg class="absolute inset-0 w-full h-full pointer-events-none stroke-secondary" stroke-dasharray="3" stroke-width="2">
+<line x1="50%" x2="25%" y1="50%" y2="30%"></line>
+<line x1="50%" x2="75%" y1="50%" y2="30%"></line>
+<line x1="50%" x2="30%" y1="50%" y2="75%"></line>
+<line x1="50%" x2="70%" y1="50%" y2="70%"></line>
+<line x1="25%" x2="75%" y1="30%" y2="30%"></line>
+<line x1="30%" x2="70%" y1="75%" y2="70%"></line>
+</svg>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center cursor-pointer group z-25 graph-node" data-info="运营者小李：统筹全村 38 处资产与信用流转">
+<div class="w-14 h-14 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-xl ring-4 ring-primary/20 group-hover:scale-110 transition-transform font-bold text-sm">小李</div>
+<span class="bg-surface/95 px-2.5 py-0.5 rounded-full text-xs font-bold text-primary shadow mt-1 border border-primary">运营者统筹</span>
+</div>
+<div class="absolute top-[30%] left-[25%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center cursor-pointer group z-25 graph-node" data-info="村民老王：贡献闲置平房院落，共创文创茶室">
+<div class="w-12 h-12 rounded-full bg-secondary text-on-secondary flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform font-bold text-xs">老王</div>
+<span class="bg-surface/95 px-2 py-0.5 rounded text-xs font-bold text-primary shadow mt-1 border border-secondary">村民·老王</span>
+</div>
+<div class="absolute top-[30%] left-[75%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center cursor-pointer group z-25 graph-node" data-info="青年小禾：数字游民，主导茶室美陈改造与直播">
+<div class="w-12 h-12 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform font-bold text-xs">小禾</div>
+<span class="bg-surface/95 px-2 py-0.5 rounded text-xs font-bold text-primary shadow mt-1 border border-secondary">青年·小禾</span>
+</div>
+<div class="absolute top-[75%] left-[30%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center cursor-pointer group z-25 graph-node" data-info="阿强：在地手作匠人，负责陶艺茶具共创">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform font-bold text-xs">阿强</div>
+<span class="bg-surface/95 px-2 py-0.5 rounded text-xs font-bold text-primary shadow mt-1">匠人·阿强</span>
+</div>
+<div class="absolute top-[70%] left-[70%] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center cursor-pointer group z-25 graph-node" data-info="秀英：农产品经纪人，统筹稻田认养与助农直播">
+<div class="w-10 h-10 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform font-bold text-xs">秀英</div>
+<span class="bg-surface/95 px-2 py-0.5 rounded text-xs font-bold text-primary shadow mt-1">村民·秀英</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-md border border-outline-variant">
+<h3 class="font-headline-sm text-primary mb-4">点位资产状态分布</h3>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-body-sm mb-1">
+<span class="text-on-surface-variant">已确权运营中 (32处)</span>
+<span class="font-bold text-secondary">66.6%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-3 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 66.6%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-body-sm mb-1">
+<span class="text-on-surface-variant">筹资/改造中 (10处)</span>
+<span class="font-bold text-primary">20.8%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-3 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 20.8%"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-body-sm mb-1">
+<span class="text-on-surface-variant">闲置待盘活 (6处)</span>
+<span class="font-bold text-on-surface-variant">12.6%</span>
+</div>
+<div class="w-full bg-surface-container-highest h-3 rounded-full overflow-hidden">
+<div class="bg-outline h-full rounded-full" style="width: 12.6%"></div>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-md border border-outline-variant">
+<h3 class="font-headline-sm text-primary mb-4">社区节点统计</h3>
+<div class="grid grid-cols-3 gap-3 mb-4 text-center">
+<div class="bg-surface-container-low p-3 rounded-xl">
+<span class="block text-xs text-on-surface-variant">总成员数</span>
+<span class="font-headline-sm text-primary">254 人</span>
+</div>
+<div class="bg-surface-container-low p-3 rounded-xl">
+<span class="block text-xs text-on-surface-variant">在地村民</span>
+<span class="font-headline-sm text-secondary">168 人</span>
+</div>
+<div class="bg-surface-container-low p-3 rounded-xl">
+<span class="block text-xs text-on-surface-variant">数字青年</span>
+<span class="font-headline-sm text-primary-container">86 人</span>
+</div>
+</div>
+<p class="text-body-sm text-on-surface-variant text-center">多节点动态连线：链上智能合约交互活跃度高，青年与村民共创协作网健康。</p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-md border border-outline-variant">
+<h3 class="font-headline-sm text-primary mb-3">社区活跃度趋势</h3>
+<div class="h-48 relative"><canvas height="288" id="chartLine" style="display: block; box-sizing: border-box; height: 192px; width: 276px;" width="414"></canvas></div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-md border border-outline-variant">
+<h3 class="font-headline-sm text-primary mb-3">任务类型分布</h3>
+<div class="h-48 relative"><canvas height="288" id="chartBar" style="display: block; box-sizing: border-box; height: 192px; width: 276px;" width="414"></canvas></div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-md border border-outline-variant">
+<h3 class="font-headline-sm text-primary mb-3">积分流向分布</h3>
+<div class="h-48 relative flex items-center justify-center"><canvas height="288" id="chartPie" style="display: block; box-sizing: border-box; height: 192px; width: 276px;" width="414"></canvas></div>
+</div>
+</div></section>
+</main>
+<!-- Bottom Shell Navigation -->
+<nav class="fixed bottom-0 w-full h-16 bg-surface-container-lowest shadow-[0_-1px_8px_rgba(0,0,0,0.04)] z-40 flex items-center justify-around px-margin-screen border-t border-outline-variant hidden" id="bottom-nav">
+          <a class="flex flex-col items-center text-primary font-bold cursor-pointer nav-item" data-target="map"><span class="material-symbols-outlined">map</span><span class="font-label-md">地图</span></a>
+          <a class="flex flex-col items-center text-on-surface-variant hover:text-on-surface cursor-pointer nav-task-hall"><span class="material-symbols-outlined">task</span><span class="font-label-md">任务</span></a>
+          <a class="flex flex-col items-center text-on-surface-variant hover:text-on-surface cursor-pointer nav-item" data-target="forum"><span class="material-symbols-outlined">forum</span><span class="font-label-md">议事厅</span></a>
+          <a class="flex flex-col items-center text-on-surface-variant hover:text-on-surface cursor-pointer nav-item" data-target="shop"><span class="material-symbols-outlined">storefront</span><span class="font-label-md">兑换站</span></a>
+        </nav>
+<!-- AI Assistant Floating Robot Dialog Panel -->
+<div class="fixed bottom-24 right-6 w-80 bg-surface-container-lowest rounded-xl shadow-2xl p-4 z-50 border border-outline-variant animate-fade-in hidden" id="ai-dialog-panel">
+<div class="flex justify-between items-center mb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">smart_toy</span>
+<span class="font-headline-sm text-primary">小壤 AI 助手</span>
+</div>
+<button class="text-on-surface-variant hover:text-on-surface" id="ai-panel-close-btn"><span class="material-symbols-outlined">close</span></button>
+</div>
+<div class="h-48 bg-surface-container-low rounded-xl p-3 mb-3 overflow-y-auto text-body-sm space-y-2 border border-outline-variant/30" id="ai-chat-history">
+<div class="bg-surface p-2.5 rounded-lg shadow-sm max-w-[85%] border border-outline-variant/30">你好！我是小壤 AI。有什么我可以帮您的吗？比如查询九华村地图资产、提案投票或 CCTI 指数。</div>
+</div>
+<div class="flex gap-2">
+<input class="flex-grow bg-surface-container-low px-3 py-2 rounded-xl text-body-md border border-outline-variant/50 focus:ring-1 focus:ring-secondary" id="ai-input-box" placeholder="输入您的问题..." type="text">
+<button class="px-3 py-2 rounded-xl bg-primary text-on-primary font-label-md hover:opacity-90 transition-opacity cursor-pointer" id="ai-send-btn">发送</button>
+</div>
+</div>
+<!-- Floating AI Robot Button -->
+<div class="fixed bottom-20 right-6 z-40 cursor-pointer" id="ai-robot-toggle-btn">
+<div class="relative flex items-center justify-center w-12 h-12 rounded-full bg-primary text-on-primary shadow-lg animate-pulse hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="absolute top-0 right-0 w-3 h-3 bg-error rounded-full border-2 border-surface"></span>
+</div>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    let currentRole = 'p0';
+    let proposalVotes = 21;
+    let proposalRate = 42;
+    let proposalPassed = false;
+    let userPoints = 1250;
+    let taskProofUploaded = false;
+
+    // National Map Zoom & Pan State (Default 1.2 scale)
+    let currentZoom = 1.2;
+    let panX = 0;
+    let panY = 0;
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+
+    const canvas = document.getElementById('national-map-canvas');
+    const viewport = document.getElementById('national-map-viewport');
+
+    function updateTransform() {
+      if(canvas) {
+        canvas.style.transform = `translate(${panX}px, ${panY}px) scale(${currentZoom})`;
+      }
+    }
+    
+    // Initial transform application
+    updateTransform();
+
+    if(viewport) {
+      viewport.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.clientX - panX;
+        startY = e.clientY - panY;
+        viewport.style.cursor = 'grabbing';
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if(!isDragging) return;
+        panX = e.clientX - startX;
+        panY = e.clientY - startY;
+        updateTransform();
+      });
+
+      window.addEventListener('mouseup', () => {
+        isDragging = false;
+        if(viewport) viewport.style.cursor = 'grab';
+      });
+
+      viewport.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        const zoomIntensity = 0.1;
+        if(e.deltaY < 0) {
+          currentZoom = Math.min(currentZoom + zoomIntensity, 4.0);
+        } else {
+          currentZoom = Math.max(currentZoom - zoomIntensity, 0.8);
+        }
+        updateTransform();
+      }, { passive: false });
+    }
+
+    const zoomInBtn = document.getElementById('zoom-in-btn');
+    if(zoomInBtn) {
+      zoomInBtn.addEventListener('click', () => {
+        currentZoom = Math.min(currentZoom + 0.2, 4.0);
+        updateTransform();
+      });
+    }
+
+    const zoomOutBtn = document.getElementById('zoom-out-btn');
+    if(zoomOutBtn) {
+      zoomOutBtn.addEventListener('click', () => {
+        currentZoom = Math.max(currentZoom - 0.2, 0.8);
+        updateTransform();
+      });
+    }
+
+    const zoomResetBtn = document.getElementById('zoom-reset-btn');
+    if(zoomResetBtn) {
+      zoomResetBtn.addEventListener('click', () => {
+        currentZoom = 1.2;
+        panX = 0;
+        panY = 0;
+        updateTransform();
+      });
+    }
+
+    function resetAllStates() {
+      currentRole = 'p0';
+      proposalVotes = 21;
+      proposalRate = 42;
+      proposalPassed = false;
+      userPoints = 1250;
+      taskProofUploaded = false;
+      currentZoom = 1.2;
+      panX = 0;
+      panY = 0;
+      updateTransform();
+
+      const headerRoleBadge = document.getElementById('header-role-badge');
+      if(headerRoleBadge) headerRoleBadge.innerText = '请选择身份';
+      const headerUsername = document.getElementById('header-username');
+      if(headerUsername) headerUsername.innerText = '个人中心';
+
+      document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
+      const viewP0 = document.getElementById('view-p0');
+      if(viewP0) viewP0.classList.remove('hidden');
+      const bottomNav = document.getElementById('bottom-nav');
+      if(bottomNav) bottomNav.classList.add('hidden');
+
+      const assetInput = document.getElementById('asset-input');
+      if(assetInput) assetInput.value = '村东头老院子，三间平房带个小院，想租给年轻人搞点文创。';
+      const aiCompleteBox = document.getElementById('ai-complete-box');
+      if(aiCompleteBox) aiCompleteBox.classList.add('hidden');
+      const aiLoadingBox = document.getElementById('ai-loading-box');
+      if(aiLoadingBox) aiLoadingBox.classList.add('hidden');
+      const aiGenBtn = document.getElementById('ai-generate-btn');
+      if(aiGenBtn) aiGenBtn.classList.remove('hidden');
+
+      switchTaskSubView('hall');
+
+      const uploadProofText = document.getElementById('upload-proof-text');
+      if(uploadProofText) uploadProofText.innerText = '点击上传现场照片凭证 (支持多图)';
+      const successCard = document.getElementById('task-success-card');
+      if(successCard) successCard.classList.add('hidden');
+
+      const propStatus = document.getElementById('prop-4-status');
+      if(propStatus) {
+        propStatus.innerText = '📊 表决中 (当前支持率 42%)';
+        propStatus.className = 'px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-md font-bold';
+      }
+      const propRate = document.getElementById('prop-4-rate');
+      if(propRate) propRate.innerText = '42% (21票)';
+      const propBar = document.getElementById('prop-4-bar');
+      if(propBar) propBar.style.width = '42%';
+      const propBtn = document.getElementById('prop-4-btn');
+      if(propBtn) {
+        propBtn.innerText = '投赞成票 (+6%)';
+        propBtn.disabled = false;
+      }
+      const propSuccessTip = document.getElementById('prop-success-tip');
+      if(propSuccessTip) propSuccessTip.classList.add('hidden');
+
+      const shopBalance = document.getElementById('shop-user-balance');
+      if(shopBalance) shopBalance.innerText = userPoints + ' 积分';
+
+      closeMapPin();
+      setMapScope('national');
+
+      window.scrollTo(0, 0);
+    }
+
+    function navigateTo(viewName) {
+      document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
+      const target = document.getElementById('view-' + viewName);
+      if (target) {
+        target.classList.remove('hidden');
+        window.scrollTo(0, 0);
+      }
+      if(viewName === 'cockpit') {
+        setTimeout(initCharts, 200);
+      }
+    }
+
+    function switchRole(role) {
+      resetAllStates();
+      currentRole = role;
+      const roleMeta = {
+        'wang': { name: '村民老王', badge: '村民模式', ccti: '88.5 / 100', assets: '2 处', rate: '95%' },
+        'he': { name: '青年小禾', badge: '青年模式', ccti: '92.5 / 100', assets: '4 处', rate: '98%' },
+        'li': { name: '运营者小李', badge: '运营统筹模式', ccti: '96.0 / 100', assets: '38 处', rate: '99%' }
+      };
+      
+      const meta = roleMeta[role];
+      document.getElementById('header-role-badge').innerText = meta.badge;
+      document.getElementById('header-username').innerText = meta.name;
+      document.getElementById('current-role-badge-text').innerText = meta.name;
+      document.getElementById('ccti-score-val').innerText = meta.ccti;
+      document.getElementById('ccti-asset-count').innerText = meta.assets;
+      document.getElementById('ccti-rate').innerText = meta.rate;
+
+      renderBottomNav(role);
+      document.getElementById('bottom-nav').classList.remove('hidden');
+
+      if(role === 'li') {
+        navigateTo('cockpit');
+        initCharts();
+      } else {
+        navigateTo('map');
+      }
+    }
+
+    function renderBottomNav(role) {
+      const nav = document.getElementById('bottom-nav');
+      if(!nav) return;
+      if(role === 'li') {
+        nav.innerHTML = `
+          <a class="flex flex-col items-center text-primary font-bold cursor-pointer nav-item" data-target="cockpit"><span class="material-symbols-outlined">dashboard</span><span class="font-label-md">驾驶舱</span></a>
+          <a class="flex flex-col items-center text-on-surface-variant hover:text-on-surface cursor-pointer nav-item" data-target="map"><span class="material-symbols-outlined">map</span><span class="font-label-md">地图</span></a>
+          <a class="flex flex-col items-center text-on-surface-variant hover:text-on-surface cursor-pointer nav-item" data-target="forum"><span class="material-symbols-outlined">forum</span><span class="font-label-md">议事厅</span></a>
+          <a class="flex flex-col items-center text-on-surface-variant hover:text-on-surface cursor-pointer nav-task-hall"><span class="material-symbols-outlined">task</span><span class="font-label-md">任务</span></a>
+        `;
+      } else {
+        nav.innerHTML = `
+          <a class="flex flex-col items-center text-primary font-bold cursor-pointer nav-item" data-target="map"><span class="material-symbols-outlined">map</span><span class="font-label-md">地图</span></a>
+          <a class="flex flex-col items-center text-on-surface-variant hover:text-on-surface cursor-pointer nav-task-hall"><span class="material-symbols-outlined">task</span><span class="font-label-md">任务</span></a>
+          <a class="flex flex-col items-center text-on-surface-variant hover:text-on-surface cursor-pointer nav-item" data-target="forum"><span class="material-symbols-outlined">forum</span><span class="font-label-md">议事厅</span></a>
+          <a class="flex flex-col items-center text-on-surface-variant hover:text-on-surface cursor-pointer nav-item" data-target="shop"><span class="material-symbols-outlined">storefront</span><span class="font-label-md">兑换站</span></a>
+        `;
+      }
+    }
+
+    function setMapScope(scope) {
+      const localLayer = document.getElementById('map-layer-local');
+      const nationalLayer = document.getElementById('map-layer-national');
+      const btnLocal = document.getElementById('btn-scope-local');
+      const btnNational = document.getElementById('btn-scope-national');
+      const title = document.getElementById('map-view-title');
+      const desc = document.getElementById('map-view-desc');
+      const guide = document.getElementById('map-guide-text');
+
+      if(!localLayer || !nationalLayer) return;
+
+      if(scope === 'local') {
+        localLayer.classList.remove('hidden');
+        nationalLayer.classList.add('hidden');
+        if(btnLocal) btnLocal.className = "px-4 py-1.5 rounded-lg bg-surface text-primary font-label-md shadow-sm transition-all";
+        if(btnNational) btnNational.className = "px-4 py-1.5 rounded-lg text-on-surface-variant font-label-md hover:text-primary transition-all";
+        if(title) title.innerText = "九华村数字孪生共创地图";
+        if(desc) desc.innerText = "点击动态点位查看资源详情与AI建议";
+        if(guide) guide.innerText = "👉 引导：点击地图上的“老王闲置平房”点位查看资产详情并发布空间！";
+      } else {
+        localLayer.classList.add('hidden');
+        nationalLayer.classList.remove('hidden');
+        if(btnNational) btnNational.className = "px-4 py-1.5 rounded-lg bg-surface text-primary font-label-md shadow-sm transition-all";
+        if(btnLocal) btnLocal.className = "px-4 py-1.5 rounded-lg text-on-surface-variant font-label-md hover:text-primary transition-all";
+        if(title) title.innerText = "全国乡村共创网络数字孪生视图";
+        if(desc) desc.innerText = "点击各村庄分站可查看其资产与活跃度，并支持一键切换当前村庄";
+        if(guide) guide.innerText = "👉 提示：当前展示全国地形共创网络，支持缩放与拖拽，点击任意节点即可切换主站！";
+      }
+    }
+
+    function switchVillage(name, coords, stats) {
+      const locLabel = document.getElementById('map-location-label');
+      if(locLabel) locLabel.innerText = `当前位置：${name}（${coords}）`;
+      alert(`已成功切换当前主站至：${name}！\n村庄概况：${stats}`);
+      setMapScope('local');
+    }
+
+    function openMapPin(pinId) {
+      const detail = document.getElementById('map-pin-detail');
+      if(!detail) return;
+      detail.classList.remove('hidden');
+      if(pinId === 'pin1') {
+        document.getElementById('pin-title').innerText = '老王闲置平房';
+        document.getElementById('pin-desc').innerText = '位于九华村三组，面积120平米带有独立院落，适合作为茶室或手作工作室。';
+      } else if(pinId === 'pin2') {
+        document.getElementById('pin-title').innerText = '古法榨油坊改造';
+        document.getElementById('pin-desc').innerText = '亟需青年设计团队进行空间活化与非遗文创转化。';
+      } else {
+        document.getElementById('pin-title').innerText = '周末稻田市集';
+        document.getElementById('pin-desc').innerText = '常态化周末市集机会，欢迎各地青年摊主与村民入驻。';
+      }
+    }
+
+    function closeMapPin() {
+      const detail = document.getElementById('map-pin-detail');
+      if(detail) detail.classList.add('hidden');
+    }
+
+    function switchTaskSubView(view) {
+      document.querySelectorAll('.task-sub-view').forEach(el => el.classList.add('hidden'));
+      const target = document.getElementById('task-sub-' + view);
+      if(target) target.classList.remove('hidden');
+      window.scrollTo(0, 0);
+    }
+
+    function toggleCCTI(show) {
+      const modal = document.getElementById('ccti-modal');
+      if(!modal) return;
+      if (show) {
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+      } else {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      }
+    }
+
+    function toggleAIDialog(forceState) {
+      const panel = document.getElementById('ai-dialog-panel');
+      if(!panel) return;
+      if(typeof forceState === 'boolean') {
+        if(forceState) panel.classList.remove('hidden');
+        else panel.classList.add('hidden');
+      } else {
+        panel.classList.toggle('hidden');
+      }
+    }
+
+    // Event Bindings
+    const headerLogoBtn = document.getElementById('header-logo-btn');
+    if(headerLogoBtn) headerLogoBtn.addEventListener('click', resetAllStates);
+
+    const headerResetBtn = document.getElementById('header-reset-btn');
+    if(headerResetBtn) headerResetBtn.addEventListener('click', resetAllStates);
+
+    const headerCctiBtn = document.getElementById('header-ccti-btn');
+    if(headerCctiBtn) headerCctiBtn.addEventListener('click', () => toggleCCTI(true));
+
+    const cctiCloseBtn = document.getElementById('ccti-close-btn');
+    if(cctiCloseBtn) cctiCloseBtn.addEventListener('click', () => toggleCCTI(false));
+
+    // Role selection cards
+    document.querySelectorAll('.role-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const role = card.getAttribute('data-role');
+        switchRole(role);
+      });
+    });
+
+    const quickStartBtn = document.getElementById('quick-start-btn');
+    if(quickStartBtn) quickStartBtn.addEventListener('click', () => switchRole('he'));
+
+    // Map scope buttons
+    const btnScopeLocal = document.getElementById('btn-scope-local');
+    if(btnScopeLocal) btnScopeLocal.addEventListener('click', () => setMapScope('local'));
+
+    const btnScopeNational = document.getElementById('btn-scope-national');
+    if(btnScopeNational) btnScopeNational.addEventListener('click', () => setMapScope('national'));
+
+    const guideGotoCreateBtn = document.getElementById('guide-goto-create-btn');
+    if(guideGotoCreateBtn) guideGotoCreateBtn.addEventListener('click', () => {
+      switchTaskSubView('create');
+      navigateTo('tasks');
+    });
+
+    // Map pins & villages
+    document.querySelectorAll('.map-pin').forEach(pin => {
+      pin.addEventListener('click', () => {
+        openMapPin(pin.getAttribute('data-pin'));
+      });
+    });
+
+    document.querySelectorAll('.village-node').forEach(node => {
+      node.addEventListener('click', () => {
+        switchVillage(
+          node.getAttribute('data-village'),
+          node.getAttribute('data-coords'),
+          node.getAttribute('data-stats')
+        );
+      });
+    });
+
+    const pinCloseBtn = document.getElementById('pin-close-btn');
+    if(pinCloseBtn) pinCloseBtn.addEventListener('click', closeMapPin);
+
+    const pinGotoCreateBtn = document.getElementById('pin-goto-create-btn');
+    if(pinGotoCreateBtn) pinGotoCreateBtn.addEventListener('click', () => {
+      switchTaskSubView('create');
+      navigateTo('tasks');
+    });
+
+    const pinGotoForumBtn = document.getElementById('pin-goto-forum-btn');
+    if(pinGotoForumBtn) pinGotoForumBtn.addEventListener('click', () => navigateTo('forum'));
+
+    // Task & AI Gen
+    const aiGenerateBtn = document.getElementById('ai-generate-btn');
+    if(aiGenerateBtn) {
+      aiGenerateBtn.addEventListener('click', () => {
+        aiGenerateBtn.classList.add('hidden');
+        const loadingBox = document.getElementById('ai-loading-box');
+        if(loadingBox) loadingBox.classList.remove('hidden');
+
+        setTimeout(() => {
+          if(loadingBox) loadingBox.classList.add('hidden');
+          const completeBox = document.getElementById('ai-complete-box');
+          if(completeBox) completeBox.classList.remove('hidden');
+        }, 1500);
+      });
+    }
+
+    const aiGotoForumBtn = document.getElementById('ai-goto-forum-btn');
+    if(aiGotoForumBtn) aiGotoForumBtn.addEventListener('click', () => navigateTo('forum'));
+
+    const gotoCreateTaskBtn = document.getElementById('goto-create-task-btn');
+    if(gotoCreateTaskBtn) gotoCreateTaskBtn.addEventListener('click', () => switchTaskSubView('create'));
+
+    document.querySelectorAll('.task-back-hall-btn').forEach(btn => {
+      btn.addEventListener('click', () => switchTaskSubView('hall'));
+    });
+
+    document.querySelectorAll('.goto-detail-btn').forEach(btn => {
+      btn.addEventListener('click', () => switchTaskSubView('detail'));
+    });
+
+    // Upload proof
+    const uploadProofBox = document.getElementById('upload-proof-box');
+    if(uploadProofBox) {
+      uploadProofBox.addEventListener('click', () => {
+        taskProofUploaded = true;
+        const proofText = document.getElementById('upload-proof-text');
+        if(proofText) proofText.innerText = '✅ 凭证照片已上传成功 (jiuhua_yard_revamp_01.jpg)';
+      });
+    }
+
+    // Submit Proof Button & Success Card
+    const submitProofBtn = document.getElementById('submit-proof-btn');
+    if(submitProofBtn) {
+      submitProofBtn.addEventListener('click', () => {
+        if(!taskProofUploaded) {
+          alert('请先点击上方虚线框上传现场照片凭证再提交成果！');
+          return;
+        }
+        userPoints += 1250;
+        const balanceElem = document.getElementById('shop-user-balance');
+        if(balanceElem) {
+          balanceElem.innerText = userPoints.toLocaleString() + ' 积分';
+        }
+
+        const successCard = document.getElementById('task-success-card');
+        if(successCard) {
+          successCard.classList.remove('hidden');
+          successCard.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+
+    const gotoShopFromSuccessBtn = document.getElementById('goto-shop-from-success-btn');
+    if(gotoShopFromSuccessBtn) {
+      gotoShopFromSuccessBtn.addEventListener('click', () => {
+        navigateTo('shop');
+      });
+    }
+
+    // Forum & Voting
+    const newProposalBtn = document.getElementById('new-proposal-btn');
+    if(newProposalBtn) {
+      newProposalBtn.addEventListener('click', () => {
+        const title = prompt('请输入新提案标题：', '村东头老桥夜景亮化工程提案');
+        if(title) {
+          alert('提案《' + title + '》已成功发布至议事大厅公示中！');
+        }
+      });
+    }
+
+    const prop4Btn = document.getElementById('prop-4-btn');
+    if(prop4Btn) {
+      prop4Btn.addEventListener('click', () => {
+        proposalVotes += 6;
+        proposalRate += 12;
+        const rateElem = document.getElementById('prop-4-rate');
+        if(rateElem) rateElem.innerText = proposalRate + '% (' + proposalVotes + '票)';
+        const barElem = document.getElementById('prop-4-bar');
+        if(barElem) barElem.style.width = proposalRate + '%';
+        
+        if(proposalRate >= 50 && !proposalPassed) {
+          proposalPassed = true;
+          const statusElem = document.getElementById('prop-4-status');
+          if(statusElem) {
+            statusElem.innerText = '🎉 议事已通过 (支持率 ' + proposalRate + '%)';
+            statusElem.className = 'px-3 py-1 rounded-full bg-secondary text-on-secondary font-label-md font-bold';
+          }
+          const successTip = document.getElementById('prop-success-tip');
+          if(successTip) successTip.classList.remove('hidden');
+          prop4Btn.innerText = '议事已圆满通过';
+          prop4Btn.disabled = true;
+        } else {
+          alert('投票成功！当前赞成率：' + proposalRate + '%');
+        }
+      });
+    }
+
+    const propWhitepaperBtn = document.getElementById('prop-whitepaper-btn');
+    if(propWhitepaperBtn) {
+      propWhitepaperBtn.addEventListener('click', () => {
+        alert('已查阅：预算明细透明、四方权益分配智能合约已通过合规审核。');
+      });
+    }
+
+    const propGotoTaskDetailBtn = document.getElementById('prop-goto-task-detail-btn');
+    if(propGotoTaskDetailBtn) {
+      propGotoTaskDetailBtn.addEventListener('click', () => {
+        switchTaskSubView('detail');
+        navigateTo('tasks');
+      });
+    }
+
+    document.querySelectorAll('.matrix-goto-task').forEach(btn => {
+      btn.addEventListener('click', () => {
+        switchTaskSubView('hall');
+        navigateTo('tasks');
+      });
+    });
+
+    document.querySelectorAll('.matrix-detail-1').forEach(btn => {
+      btn.addEventListener('click', () => alert('提案 #03 详情：支持率 89%，已由青年小禾与村民老陈共同执行。'));
+    });
+
+    document.querySelectorAll('.matrix-detail-2').forEach(btn => {
+      btn.addEventListener('click', () => alert('提案 #05 详情：支持率 92%，公共池拨款已到位。'));
+    });
+
+    document.querySelectorAll('.matrix-restart').forEach(btn => {
+      btn.addEventListener('click', () => alert('已重新发起修订讨论，将调整为无烟轻食夜市方案。'));
+    });
+
+    document.querySelectorAll('.matrix-detail-3').forEach(btn => {
+      btn.addEventListener('click', () => alert('提案 #02 详情：支持率 31%，未达 50% 门槛，已退回修订。'));
+    });
+
+    document.querySelectorAll('.matrix-vote-6').forEach(btn => {
+      btn.addEventListener('click', () => alert('投票成功！支持率升至 54%。'));
+    });
+
+    document.querySelectorAll('.matrix-detail-6').forEach(btn => {
+      btn.addEventListener('click', () => alert('提案 #06 详情：当前支持率 54%，预计明日通过。'));
+    });
+
+    const postForumBtn = document.getElementById('post-forum-btn');
+    if(postForumBtn) {
+      postForumBtn.addEventListener('click', () => {
+        const content = prompt('请输入您的讨论内容：', '大家觉得周末的市集活动还可以增加哪些非遗手作体验？');
+        if(content) {
+          const list = document.getElementById('forum-posts-list');
+          if(list) {
+            list.innerHTML = `
+              <div class="p-4 bg-surface-container-low rounded-xl border border-outline-variant/45 animate-fade-in">
+                <div class="flex justify-between items-center mb-1">
+                  <span class="font-bold text-primary text-body-md flex items-center gap-1.5"><span class="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center text-xs">我</span> 我：</span>
+                  <span class="text-xs text-on-surface-variant">刚刚</span>
+                </div>
+                <p class="text-body-sm text-on-surface mb-2">"${content}"</p>
+                <div class="flex items-center gap-4 text-xs text-on-surface-variant">
+                  <button class="hover:text-secondary flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">thumb_up</span> 赞同 (1)</button>
+                  <button class="hover:text-secondary flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">chat</span> 回复</button>
+                </div>
+              </div>
+            ` + list.innerHTML;
+          }
+          alert('发表成功！');
+        }
+      });
+    }
+
+    document.querySelectorAll('.forum-like-btn').forEach(btn => {
+      btn.addEventListener('click', () => alert('已点赞 +1'));
+    });
+
+    document.querySelectorAll('.forum-reply-btn').forEach(btn => {
+      btn.addEventListener('click', () => alert('回复功能已开启'));
+    });
+
+    // Exchange items
+    document.querySelectorAll('.exchange-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const cost = parseInt(btn.getAttribute('data-cost'));
+        const itemName = btn.getAttribute('data-name');
+        if(userPoints >= cost) {
+          userPoints -= cost;
+          const balanceElem = document.getElementById('shop-user-balance');
+          if(balanceElem) balanceElem.innerText = userPoints.toLocaleString() + ' 积分';
+          alert(`🎉 兑换成功！已扣除 ${cost} 积分，成功兑换【${itemName}】！`);
+        } else {
+          alert(`❌ 积分不足！您当前有 ${userPoints} 积分，兑换该物品需要 ${cost} 积分。`);
+        }
+      });
+    });
+
+    // Graph nodes alert
+    document.querySelectorAll('.graph-node').forEach(node => {
+      node.addEventListener('click', () => alert(node.getAttribute('data-info')));
+    });
+
+    // Bottom Nav delegation / binding
+    const bottomNav = document.getElementById('bottom-nav');
+    if(bottomNav) {
+      bottomNav.addEventListener('click', (e) => {
+        const item = e.target.closest('[data-target]');
+        if(item) {
+          navigateTo(item.getAttribute('data-target'));
+        } else if(e.target.closest('.nav-task-hall')) {
+          switchTaskSubView('hall');
+          navigateTo('tasks');
+        }
+      });
+    }
+
+    // AI Robot Dialog
+    const aiRobotToggleBtn = document.getElementById('ai-robot-toggle-btn');
+    if(aiRobotToggleBtn) aiRobotToggleBtn.addEventListener('click', () => toggleAIDialog());
+
+    const aiPanelCloseBtn = document.getElementById('ai-panel-close-btn');
+    if(aiPanelCloseBtn) aiPanelCloseBtn.addEventListener('click', () => toggleAIDialog(false));
+
+    const aiSendBtn = document.getElementById('ai-send-btn');
+    if(aiSendBtn) {
+      aiSendBtn.addEventListener('click', sendAIPrompt);
+    }
+    const aiInputBox = document.getElementById('ai-input-box');
+    if(aiInputBox) {
+      aiInputBox.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter') sendAIPrompt();
+      });
+    }
+
+    function sendAIPrompt() {
+      const input = document.getElementById('ai-input-box');
+      const history = document.getElementById('ai-chat-history');
+      if(!input || !input.value.trim() || !history) return;
+      
+      const userText = input.value;
+      history.innerHTML += `<div class="bg-primary text-on-primary p-2.5 rounded-lg shadow-sm max-w-[85%] ml-auto">${userText}</div>`;
+      input.value = '';
+      
+      setTimeout(() => {
+        let reply = "收到您的咨询！小壤 AI 正在为您检索九华村最新共创资产与信用数据...";
+        if(userText.includes('积分')) reply = `您当前账户共有 ${userPoints.toLocaleString()} 积分，社区公共池基金为 8,600 积分，可通过任务广场接单获得更多！`;
+        if(userText.includes('老王')) reply = "村民老王的平房位于九华村三组（北纬30.5° 东经120.5°），目前已通过议事并落地真实任务！";
+        if(userText.includes('网络') || userText.includes('全国')) reply = "全国共创网络目前已连通九华村、杭州枢纽站、秦岭生态点、关中平原协作点等数字孪生分站，支持自由缩放！";
+        
+        history.innerHTML += `<div class="bg-surface p-2.5 rounded-lg shadow-sm max-w-[85%] border border-outline-variant/30">${reply}</div>`;
+        history.scrollTop = history.scrollHeight;
+      }, 500);
+    }
+
+    let chartsInitialized = false;
+    function initCharts() {
+      if(chartsInitialized) return;
+      const ctxLineElem = document.getElementById('chartLine');
+      const ctxBarElem = document.getElementById('chartBar');
+      const ctxPieElem = document.getElementById('chartPie');
+      if(!ctxLineElem || !ctxBarElem || !ctxPieElem) return;
+      
+      chartsInitialized = true;
+
+      new Chart(ctxLineElem.getContext('2d'), {
+        type: 'line',
+        data: {
+          labels: ['1月', '2月', '3月', '4月', '5月', '6月'],
+          datasets: [{
+            label: '活跃度',
+            data: [65, 70, 78, 85, 90, 94.2],
+            borderColor: '#3c6a00',
+            backgroundColor: 'rgba(60, 106, 0, 0.1)',
+            fill: true,
+            tension: 0.3
+          }]
+        },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+      });
+
+      new Chart(ctxBarElem.getContext('2d'), {
+        type: 'bar',
+        data: {
+          labels: ['空间活化', '数字农业', '文创市集', '在地手作'],
+          datasets: [{
+            label: '数量',
+            data: [18, 12, 9, 14],
+            backgroundColor: '#442a22'
+          }]
+        },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+      });
+
+      new Chart(ctxPieElem.getContext('2d'), {
+        type: 'doughnut',
+        data: {
+          labels: ['青年分成', '村民收益', '公共池基金'],
+          datasets: [{
+            data: [50, 35, 15],
+            backgroundColor: ['#3c6a00', '#442a22', '#b8f47a']
+          }]
+        },
+        options: { responsive: true, maintainAspectRatio: false }
+      });
+    }
+  });
+</script>
+
+
+</body></html>
